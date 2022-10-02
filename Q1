@@ -1,0 +1,43 @@
+public class Container {
+    public Double valorAluguel;
+    public String localidade;
+    public Boolean disponivel;
+
+    public String dataPag;
+    public String nomePagador;
+
+    public Container(Double valorAluguel, String localidade) {
+        this.valorAluguel = valorAluguel;
+        this.localidade = localidade;
+        this.disponivel = true;
+    }
+
+    public void alugar(String dataPag,String nomePagador){
+        this.dataPag = dataPag;
+        this.nomePagador = nomePagador;
+        this.disponivel = false;
+        System.out.println("Container Alugado por "+nomePagador);
+    }
+
+    public void desalugar(){
+        this.disponivel = true;
+        System.out.println("Container Desalugado");
+    }
+
+    @Override
+    public String toString() {
+        return (valorAluguel+" "+ disponivel);
+    }
+}
+____________________________________
+
+public class Main {
+    public static void main(String[] args) {
+        Container teste = new Container(1000.0,"RUA A");
+        System.out.println(teste.toString());
+        teste.alugar("22/07/2001","Luis");
+        System.out.println(teste.toString());
+        teste.desalugar();
+        System.out.println(teste.toString());
+    }
+}

@@ -1,0 +1,61 @@
+public class Conteixo {
+    public Double valorAluguel;
+    public String localidade;
+    public Boolean disponivel;
+    public IContainer meuEstado;
+
+    public Conteixo(){
+        this.meuEstado = new cDesalugado();
+        System.out.println("Container disponivel");
+    }
+
+    public void alugar() {
+        this.meuEstado.alugar();
+    }
+    public void desalugar(){
+        this.meuEstado.desalugar();
+    }
+}
+--------------------------------
+public class cDesalugado implements IContainer{
+    public Double valorAluguel;
+    public String localidade;
+    public Boolean disponivel;
+    public String nomeSolicitante;
+    public String dataPag;
+
+    @Override
+    public void alugar(Conteixo c, String nomeSolicitante, String dataPag) {
+      this.nomeSolicitante = nomeSolicitante;
+      this.dataPag = dataPag;
+      c.meuEstado = new cAlugado();
+      System.out.println("Obrigado por alugar este container");
+    };
+
+    public void desalugar(Conteixo c){
+        System.out.println("Este container já esta desalugado");
+    };
+
+}
+
+--------------------------------------------
+public class cAlugado implements IContainer {
+
+    @Override
+    public void alugar(Conteixo c, String nomeSolicitante, String dataPag) {
+        System.out.println("Este container não pode ser Alugado");
+    }
+
+    public void desalugar(Conteixo c) {
+        System.out.println("Este container já esta desalugado");
+        c.meuEstado = new cDesalugado();
+    }
+
+}
+
+------------------------------
+public interface IContainer {
+    public void alugar(Conteixo c, String nomeSolicitante, String dataPag);
+    public void desalugar(Conteixo c);
+}
+
